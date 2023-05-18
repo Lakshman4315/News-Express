@@ -1,4 +1,6 @@
 package com.example.newsexpresss.model
 
-class NewsModel {
-}
+data class NewsModel (
+    var imageSrc: String,
+    var title: String
+    )

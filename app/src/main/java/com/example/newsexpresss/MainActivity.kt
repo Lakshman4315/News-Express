@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsexpresss.adpater.RecyclerViewAdapter
+import com.example.newsexpresss.model.NewsModel
+import com.example.newsexpresss.model.NewsReponse
 import com.example.newsexpresss.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
-//    private lateinit var newsList: List<NewsModel>
 
-    lateinit var mainViewModel: MainViewModel
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,21 +25,22 @@ class MainActivity : AppCompatActivity() {
 
         init()
 
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerViewAdapter = RecyclerViewAdapter(newsList)
-//        val apiService = ApiClient().apiService;
-//        val repository = Repository(apiService)
+        var newsArray = ArrayList<NewsModel>()
 
-//        val repository = Repository()
-//        val viewModelProviderFactory = MainViewModelFactory(repository)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerViewAdapter = RecyclerViewAdapter(newsArray)
+
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         mainViewModel.newsItem.observe( this, Observer{
 
-            Log.d("Result", it.size.toString())
+            for(news in it){
+                newsArray.add(NewsModel(news.urlToImage.toString(),news.title.toString()))
+            }
         })
 
-        mainViewModel.fetchNewsItems()
+        mainViewModel.fetchNewsItems("us")
     }
+
 
     private fun init(){
         recyclerView = findViewById(R.id.recyclerView)

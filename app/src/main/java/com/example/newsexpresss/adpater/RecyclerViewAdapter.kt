@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsexpresss.R
 import com.example.newsexpresss.model.Article
+import com.example.newsexpresss.model.NewsModel
 
-class RecyclerViewAdapter(private val newsList: List<Article>) :
+class RecyclerViewAdapter(private val newsList: ArrayList<NewsModel>) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
 

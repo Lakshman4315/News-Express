@@ -18,9 +18,9 @@ class MainViewModel() : ViewModel() {
 
     val newsItem: LiveData<List<Article>> = _newsItems
 
-    fun fetchNewsItems(){
+    fun fetchNewsItems(country: String){
         viewModelScope.launch {
-            val items = repository.getNewsItem()
+            val items = repository.getNewsItem(country)
             _newsItems.value = items
         }
     }

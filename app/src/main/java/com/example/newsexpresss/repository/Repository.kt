@@ -6,8 +6,8 @@ import com.example.newsexpresss.model.Article
 
 class Repository {
 
-    suspend fun getNewsItem(): List<Article> {
-        val response = apiService.getNewsList()
+    suspend fun getNewsItem(country: String): List<Article> {
+        val response = apiService.getNewsList(country=country)
         return if(response.isSuccessful){
             response.body()?.articles ?: emptyList()
         }else{
